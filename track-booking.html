@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Track Your Booking - Apex Cleaners</title>
+    <title>Track Your Booking – Apex Cleaners</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -14,23 +14,37 @@
         .status-cancelled { background-color: #ef4444; }
     </style>
 </head>
-<body class="bg-gray-900">
+<body class="bg-gray-900 min-h-screen flex flex-col">
 
-    <div class="min-h-screen flex items-center justify-center px-4 py-12">
+    <div class="flex-grow flex items-center justify-center px-4 py-12">
         <div class="max-w-2xl w-full">
+            <!-- Back link -->
+            <a href="index.html" class="inline-flex items-center gap-2 text-[#14B8A6] hover:text-[#0D9488] mb-6 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Home
+            </a>
+
             <div class="text-center mb-8">
-                <a href="index.html" class="text-[#14B8A6] hover:underline text-sm">← Back to Home</a>
                 <h1 class="text-3xl md:text-4xl font-bold text-white mt-4">Track Your <span class="text-[#14B8A6]">Booking</span></h1>
-                <p class="text-gray-400 mt-2">Enter your unique Booking ID (provided after booking submission).</p>
+                <p class="text-gray-400 mt-3">Enter the unique Booking ID you received after booking.</p>
             </div>
 
             <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
                 <form id="track-form" class="space-y-4">
                     <div>
                         <label class="block text-gray-300 mb-2">Booking ID</label>
-                        <input type="text" id="booking-id" required class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-[#14B8A6] outline-none" placeholder="e.g., abc123...">
+                        <input type="text" id="booking-id" required 
+                               class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-[#14B8A6] outline-none" 
+                               placeholder="e.g., a1b2c3d4e5f6...">
+                        <p class="text-gray-500 text-xs mt-1">Your Booking ID was shown after you submitted the booking form.</p>
                     </div>
-                    <button type="submit" class="w-full py-3 bg-[#14B8A6] hover:bg-[#0D9488] text-white font-bold rounded-xl transition">Track Booking</button>
+                    <button type="submit" id="track-btn" 
+                            class="w-full py-3 bg-[#14B8A6] hover:bg-[#0D9488] text-white font-bold rounded-xl transition flex items-center justify-center gap-2">
+                        <span id="btn-text">Track Booking</span>
+                        <span id="spinner" class="hidden w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    </button>
                 </form>
 
                 <div id="result-area" class="mt-6 hidden">
@@ -41,6 +55,12 @@
             </div>
         </div>
     </div>
+
+    <footer class="bg-gray-900 py-4 border-t border-gray-800">
+        <div class="text-center text-sm text-gray-500">
+            &copy; 2026 Apex Cleaners. All rights reserved.
+        </div>
+    </footer>
 
     <script type="importmap">
         {
@@ -59,6 +79,9 @@
         const resultArea = document.getElementById('result-area');
         const bookingCard = document.getElementById('booking-card');
         const errorDiv = document.getElementById('error-message');
+        const trackBtn = document.getElementById('track-btn');
+        const btnText = document.getElementById('btn-text');
+        const spinner = document.getElementById('spinner');
 
         function getStatusBadge(status) {
             const statusMap = {
@@ -83,8 +106,12 @@
             const bookingId = bookingIdInput.value.trim();
             if (!bookingId) return;
 
+            // Show loading state
             resultArea.classList.add('hidden');
             errorDiv.classList.add('hidden');
+            btnText.textContent = 'Tracking…';
+            spinner.classList.remove('hidden');
+            trackBtn.disabled = true;
 
             try {
                 const docRef = doc(db, 'bookings', bookingId);
@@ -106,7 +133,6 @@
                 const specialNotes = booking.specialInstructions || '';
                 const createdAt = booking.createdAt?.toDate ? booking.createdAt.toDate().toLocaleString() : 'Unknown';
 
-                // (Optional) Hide sensitive info like phone number? We'll keep it clean.
                 bookingCard.innerHTML = `
                     <div class="space-y-2">
                         <div class="flex justify-between items-center">
@@ -128,6 +154,10 @@
                 console.error(err);
                 errorDiv.textContent = 'Something went wrong. Please try again later.';
                 errorDiv.classList.remove('hidden');
+            } finally {
+                btnText.textContent = 'Track Booking';
+                spinner.classList.add('hidden');
+                trackBtn.disabled = false;
             }
         });
 
