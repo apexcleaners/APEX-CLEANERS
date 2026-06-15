@@ -1,0 +1,51 @@
+/* =========================================================
+   Contact Cards (Email, WhatsApp, LinkedIn)
+   ========================================================= */
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  width: 100%;
+  min-height: 80px;
+
+  padding: 20px 24px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 18px;
+
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.3);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+}
+
+.contact-card i {
+  font-size: 2rem;
+}
+
+.contact-card.email i {
+  color: #EA4335;
+}
+
+.contact-card.whatsapp i {
+  color: #25D366;
+}
+
+.contact-card.linkedin i {
+  color: #0A66C2;
+}
