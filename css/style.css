@@ -1,30 +1,106 @@
-/* =========================================================
-   Contact Cards (Email, WhatsApp, LinkedIn)
-   ========================================================= */
+/* ============================================================
+   GLOBAL MOBILE RESPONSIVE FIXES – Apex Cleaners
+   ============================================================ */
+
+/* 1. Base mobile adjustments (≤768px) */
+@media (max-width: 768px) {
+
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+    padding: 0 10px;
+  }
+
+  /* Stack containers vertically */
+  .container, 
+  .row, 
+  .flex-container, 
+  section, 
+  header, 
+  footer {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Images, videos, iframes fit screen */
+  img, video, iframe {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* Improve text readability & wrapping */
+  p, li, td, th, span, a {
+    word-wrap: break-word;
+    font-size: 16px;
+  }
+
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  h3 { font-size: 1.2rem !important; }
+
+  /* Buttons & inputs: full‑width + larger */
+  button, .btn, a.button, input[type="submit"] {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+  }
+
+  /* Navigation – stack vertically */
+  nav ul, .navbar, .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav li {
+    margin: 5px 0;
+  }
+
+  /* Scrollable wide tables */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* 2. Extra small screens (≤480px) */
+@media (max-width: 480px) {
+  body {
+    padding: 0 5px;
+  }
+
+  h1 { font-size: 1.8rem !important; }
+  h2 { font-size: 1.3rem !important; }
+}
+
+
+/* ============================================================
+   CONTACT CARDS (Email, WhatsApp, LinkedIn)
+   ============================================================ */
 
 .contact-card {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-
   width: 100%;
   min-height: 80px;
-
   padding: 20px 24px;
-
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 18px;
-
   color: #ffffff;
   text-decoration: none;
   font-size: 1.2rem;
   font-weight: 600;
-
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-
   transition: all 0.3s ease;
 }
 
@@ -38,14 +114,310 @@
   font-size: 2rem;
 }
 
-.contact-card.email i {
-  color: #EA4335;
+.contact-card.email i { color: #EA4335; }
+.contact-card.whatsapp i { color: #25D366; }
+.contact-card.linkedin i { color: #0A66C2; }
+
+/* Mobile adjustments for contact cards */
+@media (max-width: 640px) {
+  .contact-card {
+    padding: 16px 20px;
+    min-height: 70px;
+    font-size: 1rem;
+    gap: 10px;
+    border-radius: 14px;
+  }
+
+  .contact-card i {
+    font-size: 1.75rem;
+  }
+
+  .contact-card + .contact-card {
+    margin-top: 12px;
+  }
 }
 
-.contact-card.whatsapp i {
-  color: #25D366;
+@media (max-width: 400px) {
+  .contact-card {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    min-height: 64px;
+  }
+
+  .contact-card i {
+    font-size: 1.5rem;
+  }
 }
 
-.contact-card.linkedin i {
-  color: #0A66C2;
+
+/* ============================================================
+   SCROLL GALLERY (Equipment / Tools)
+   ============================================================ */
+
+.scroll-gallery {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 10px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-gallery::-webkit-scrollbar { height: 6px; }
+.scroll-gallery::-webkit-scrollbar-thumb { background: #14B8A6; border-radius: 4px; }
+
+.scroll-gallery img {
+  scroll-snap-align: start;
+  min-width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #14B8A6;
+  transition: transform 0.3s ease;
+}
+
+.scroll-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Smaller gallery images on phones */
+@media (max-width: 480px) {
+  .scroll-gallery img {
+    min-width: 140px;
+    height: 140px;
+  }
+}
+
+
+/* ============================================================
+   BEFORE / AFTER CAROUSEL
+   ============================================================ */
+
+/* Carousel buttons (prev/next) */
+#carousel button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Slightly larger for touch */
+@media (max-width: 640px) {
+  #carousel button {
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+}
+
+
+/* ============================================================
+   REVIEW CARDS
+   ============================================================ */
+
+.review-card {
+  background: #1e293b;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  border: 1px solid #334155;
+  transition: all 0.2s;
+}
+
+.review-card:hover {
+  border-color: #14B8A6;
+  background: rgba(20, 184, 166, 0.05);
+}
+
+/* Ensure buttons inside review cards are easy to tap */
+@media (max-width: 640px) {
+  .review-card .flex-wrap.gap-2 button,
+  .review-card .flex-wrap.gap-2 a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* ============================================================
+   STAR RATING INPUT (Write a Review)
+   ============================================================ */
+
+.star-input-group {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.star-input {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #4b5563;
+  transition: all 0.1s;
+}
+
+.star-input:hover,
+.star-input.is-hover {
+  color: #fbbf24;
+  transform: scale(1.1);
+}
+
+.star-input.is-active {
+  color: #fbbf24;
+}
+
+/* Scale down stars on tiny screens */
+@media (max-width: 480px) {
+  .star-input {
+    font-size: 1.5rem;
+  }
+}
+
+
+/* ============================================================
+   TEAM SECTION – Photos
+   ============================================================ */
+
+/* Default team photo size (as in your HTML) */
+.w-48.h-48 {
+  width: 12rem;   /* 192px */
+  height: 12rem;
+}
+
+/* Reduce size on mobile to avoid dominating the screen */
+@media (max-width: 640px) {
+  .w-48.h-48 {
+    width: 8rem;   /* 128px */
+    height: 8rem;
+  }
+}
+
+
+/* ============================================================
+   SERVICES & SUBSCRIPTIONS CARDS
+   ============================================================ */
+
+/* Ensure cards don't get too squeezed */
+.service-card,
+.subscription-card {
+  min-width: 0;  /* prevents overflow */
+}
+
+
+/* ============================================================
+   FORMS (Booking, Calculator, Quote, Review)
+   ============================================================ */
+
+/* Make all form inputs, selects, textareas full‑width on mobile */
+@media (max-width: 640px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  select,
+  textarea {
+    width: 100% !important;
+  }
+
+  /* Keep the phone prefix +263 attached properly */
+  #booking-phone {
+    width: calc(100% - 70px) !important;  /* subtract prefix width */
+  }
+
+  /* Stack grid‑based forms into a single column */
+  .grid.md\:grid-cols-2,
+  .grid.md\:grid-cols-3,
+  .grid.md\:grid-cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* ============================================================
+   FAQ SECTION
+   ============================================================ */
+
+details {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+summary {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+footer .flex-col {
+  flex-direction: column;
+}
+
+footer .flex-wrap {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+
+/* Stack hero text / image on mobile (Tailwind already does md:grid-cols-2, so it's fine) */
+/* Adjust heading size for smaller screens */
+@media (max-width: 640px) {
+  .hero-heading {
+    font-size: 2.5rem !important;
+  }
+}
+
+
+/* ============================================================
+   WHY CHOOSE US RIBBON
+   ============================================================ */
+
+/* Already using grid-cols-2 md:grid-cols-4 – perfect */
+
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+/* Mobile menu link hover */
+#mobileMenu a {
+  display: block;
+  padding: 12px 0;
+  font-size: 1.1rem;
+}
+
+/* Mobile menu background matches main theme */
+#mobileMenu {
+  background-color: #0F172A;
+}
+
+
+/* ============================================================
+   LOADER
+   ============================================================ */
+
+#loader {
+  z-index: 9999;
+}
+
+
+/* ============================================================
+   BOOK NOW FLOATING BUTTON (Mobile only)
+   ============================================================ */
+
+/* Already hidden on desktop (md:hidden), shown on mobile */
+/* Make sure it's big enough */
+.fixed.bottom-4.right-4 {
+  bottom: 1.5rem;
+  right: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
 }
