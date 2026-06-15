@@ -1,15 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"><title>Privacy Policy – Apex Cleaners</title>
-  <!-- Tailwind CDN (temporary) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy – Apex Cleaners</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #0F172A; color: #F8FAFC; }
+  </style>
 </head>
-<body class="bg-gray-900 text-gray-200 p-8">
-  <div class="max-w-2xl mx-auto">
-    <h1 class="text-3xl font-bold text-[#14B8A6] mb-6">Privacy Policy</h1>
-    <p>We collect your name, email, and phone only to process your booking. We never share your data. All information is stored securely and used solely for service delivery.</p>
-    <a href="index.html" class="text-[#14B8A6] mt-4 inline-block">← Back to Home</a>
+<body class="bg-gray-900 min-h-screen flex flex-col">
+  <div class="flex-grow max-w-3xl mx-auto px-6 py-16 w-full">
+    <a href="index.html" class="inline-flex items-center gap-2 text-[#14B8A6] hover:text-[#0D9488] mb-8 transition-colors">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Home
+    </a>
+
+    <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+      Privacy <span class="text-[#14B8A6]">Policy</span>
+    </h1>
+    <p class="text-gray-400 mb-10">Last updated: June 2026</p>
+
+    <div class="space-y-8 text-gray-300">
+      <!-- Introduction -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">1. Introduction</h2>
+        <p>
+          Apex Cleaners ("we", "us", or "our") operates the website
+          <a href="https://apexcleaners.github.io/APEX-CLEANERS/" class="text-[#14B8A6] hover:underline">apexcleaners.github.io/APEX-CLEANERS</a>.
+          This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service.
+        </p>
+      </section>
+
+      <!-- Information Collection -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">2. Information We Collect</h2>
+        <p>We collect the following personal information directly from you when you use our website:</p>
+        <ul class="list-disc list-inside mt-2 space-y-1">
+          <li><strong>Booking Form:</strong> Full name, email address, phone number, service preferences, and any special instructions you provide.</li>
+          <li><strong>Review Form:</strong> Name, rating, and review text.</li>
+          <li><strong>Quote Form:</strong> Name and email address.</li>
+          <li><strong>Contact via WhatsApp/Email:</strong> Any information you choose to share when you contact us.</li>
+        </ul>
+        <p class="mt-3">
+          We also collect technical data automatically (such as browser type, IP address, and page interaction data) via Firebase services to improve our website.
+        </p>
+      </section>
+
+      <!-- How We Use It -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">3. How We Use Your Data</h2>
+        <p>We use your personal data only for the following purposes:</p>
+        <ul class="list-disc list-inside mt-2 space-y-1">
+          <li>To process and confirm your cleaning bookings.</li>
+          <li>To respond to your inquiries and quote requests.</li>
+          <li>To display approved reviews on our website.</li>
+          <li>To improve our website and services (using aggregated, non-personal data).</li>
+          <li>To comply with legal obligations.</li>
+        </ul>
+      </section>
+
+      <!-- Storage & Security -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">4. Data Storage & Security</h2>
+        <p>
+          Your personal data is stored securely using <strong>Google Firebase</strong> (Firestore database), which provides industry-standard encryption at rest and in transit.
+          We take reasonable measures to protect your information, but no method of electronic storage is 100% secure.
+        </p>
+        <p class="mt-2">
+          Bookings and reviews are kept in our database to provide and improve our service. You can request deletion of your data at any time (see Section 7).
+        </p>
+      </section>
+
+      <!-- Third-Party Services -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">5. Third-Party Services</h2>
+        <p>We use the following third-party services to operate our website and business:</p>
+        <ul class="list-disc list-inside mt-2 space-y-1">
+          <li><strong>Firebase (Google)</strong> – for database, authentication, and analytics. See <a href="https://policies.google.com/privacy" class="text-[#14B8A6] hover:underline" target="_blank">Google’s Privacy Policy</a>.</li>
+          <li><strong>EmailJS</strong> – to send booking confirmation emails. See <a href="https://www.emailjs.com/legal/privacy-policy/" class="text-[#14B8A6] hover:underline" target="_blank">EmailJS Privacy Policy</a>.</li>
+          <li><strong>Google Maps</strong> – to display our location (embedded map).</li>
+          <li><strong>Tailwind CSS CDN</strong> – for website styling (no personal data is shared).</li>
+        </ul>
+        <p class="mt-2">
+          We do not sell, trade, or otherwise transfer your personal information to third parties unless required by law.
+        </p>
+      </section>
+
+      <!-- Cookies -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">6. Cookies</h2>
+        <p>
+          Our website may use essential cookies or similar technologies provided by Firebase for authentication and security purposes.
+          You can disable cookies in your browser settings, but this may affect the functionality of the website.
+        </p>
+      </section>
+
+      <!-- Your Rights -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">7. Your Data Rights</h2>
+        <p>You have the right to:</p>
+        <ul class="list-disc list-inside mt-2 space-y-1">
+          <li>Access the personal data we hold about you.</li>
+          <li>Request correction or deletion of your data.</li>
+          <li>Withdraw consent at any time (this will not affect the lawfulness of processing before withdrawal).</li>
+          <li>Lodge a complaint with a data protection authority if you believe your rights have been violated.</li>
+        </ul>
+        <p class="mt-2">To exercise any of these rights, please contact us at the email or phone number below.</p>
+      </section>
+
+      <!-- Children’s Privacy -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">8. Children’s Privacy</h2>
+        <p>
+          Our Service is not directed at anyone under the age of 13. We do not knowingly collect personal information from children.
+        </p>
+      </section>
+
+      <!-- Changes -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">9. Changes to This Policy</h2>
+        <p>
+          We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.
+        </p>
+      </section>
+
+      <!-- Contact -->
+      <section>
+        <h2 class="text-xl font-semibold text-white mb-2">10. Contact Us</h2>
+        <p>
+          If you have any questions about this Privacy Policy, please contact us:
+        </p>
+        <div class="mt-3 bg-gray-800 p-4 rounded-xl border border-gray-700">
+          <p>📧 <strong>Email:</strong> <a href="mailto:apexcleaners2026@gmail.com" class="text-[#14B8A6] hover:underline">apexcleaners2026@gmail.com</a></p>
+          <p>📞 <strong>Phone:</strong> +263 71 736 6292</p>
+          <p>📍 <strong>Address:</strong> Zimunya Township, Mutare, Zimbabwe</p>
+        </div>
+      </section>
+    </div>
   </div>
+
+  <footer class="bg-gray-900 py-6 border-t border-gray-800">
+    <div class="max-w-3xl mx-auto px-6 text-center text-sm text-gray-500">
+      &copy; 2026 Apex Cleaners. All rights reserved.
+    </div>
+  </footer>
 </body>
 </html>
