@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Track Your Booking - Apex Cleaners</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0F172A; color: #F8FAFC; }
+        .status-pending { background-color: #f59e0b; }
+        .status-confirmed { background-color: #10b981; }
+        .status-completed { background-color: #3b82f6; }
+        .status-cancelled { background-color: #ef4444; }
+    </style>
+</head>
+<body class="bg-gray-900">
+
+    <div class="min-h-screen flex items-center justify-center px-4 py-12">
+        <div class="max-w-2xl w-full">
+            <div class="text-center mb-8">
+                <a href="index.html" class="text-[#14B8A6] hover:underline text-sm">← Back to Home</a>
+                <h1 class="text-3xl md:text-4xl font-bold text-white mt-4">Track Your <span class="text-[#14B8A6]">Booking</span></h1>
+                <p class="text-gray-400 mt-2">Enter your unique Booking ID (provided after booking submission).</p>
+            </div>
+
+            <div class="bg-gray-800 rounded-2xl p-6 border border-gray-700">
+                <form id="track-form" class="space-y-4">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Booking ID</label>
+                        <input type="text" id="booking-id" required class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 text-white focus:border-[#14B8A6] outline-none" placeholder="e.g., abc123...">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-[#14B8A6] hover:bg-[#0D9488] text-white font-bold rounded-xl transition">Track Booking</button>
+                </form>
+
+                <div id="result-area" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold text-white mb-3">Booking Status</h3>
+                    <div id="booking-card" class="bg-gray-700 rounded-xl p-4 border border-gray-600"></div>
+                </div>
+                <div id="error-message" class="mt-4 text-red-400 text-sm text-center hidden"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js"
+            }
+        }
+    </script>
+    <script type="module">
+        import { db } from './js/firebase-config.js';
+        import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const form = document.getElementById('track-form');
+        const bookingIdInput = document.getElementById('booking-id');
+        const resultArea = document.getElementById('result-area');
+        const bookingCard = document.getElementById('booking-card');
+        const errorDiv = document.getElementById('error-message');
+
+        function getStatusBadge(status) {
+            const statusMap = {
+                pending: 'bg-yellow-600',
+                confirmed: 'bg-green-600',
+                completed: 'bg-blue-600',
+                cancelled: 'bg-red-600'
+            };
+            const bgClass = statusMap[status] || 'bg-gray-600';
+            return `<span class="px-3 py-1 rounded-full text-white text-xs font-semibold ${bgClass}">${status.toUpperCase()}</span>`;
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return 'Not specified';
+            const parts = dateStr.split('-');
+            if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
+            return dateStr;
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const bookingId = bookingIdInput.value.trim();
+            if (!bookingId) return;
+
+            resultArea.classList.add('hidden');
+            errorDiv.classList.add('hidden');
+
+            try {
+                const docRef = doc(db, 'bookings', bookingId);
+                const docSnap = await getDoc(docRef);
+
+                if (!docSnap.exists()) {
+                    errorDiv.textContent = 'No booking found with that ID. Please check and try again.';
+                    errorDiv.classList.remove('hidden');
+                    return;
+                }
+
+                const booking = docSnap.data();
+                const status = booking.status || 'pending';
+                const service = booking.service || 'Not specified';
+                const date = booking.preferredDate || 'Not specified';
+                const time = booking.preferredTime || 'Not specified';
+                const frequency = booking.frequency || 'Not specified';
+                const propertySize = booking.propertySize || 'Not specified';
+                const specialNotes = booking.specialInstructions || '';
+                const createdAt = booking.createdAt?.toDate ? booking.createdAt.toDate().toLocaleString() : 'Unknown';
+
+                // (Optional) Hide sensitive info like phone number? We'll keep it clean.
+                bookingCard.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-300 font-medium">Status:</span>
+                            ${getStatusBadge(status)}
+                        </div>
+                        <div><span class="text-gray-300 font-medium">Service:</span> ${escapeHtml(service)}</div>
+                        <div><span class="text-gray-300 font-medium">Date:</span> ${escapeHtml(formatDate(date))}</div>
+                        <div><span class="text-gray-300 font-medium">Time:</span> ${escapeHtml(time)}</div>
+                        <div><span class="text-gray-300 font-medium">Frequency:</span> ${escapeHtml(frequency)}</div>
+                        <div><span class="text-gray-300 font-medium">Property Size:</span> ${escapeHtml(propertySize)}</div>
+                        ${specialNotes ? `<div><span class="text-gray-300 font-medium">Special Instructions:</span> ${escapeHtml(specialNotes)}</div>` : ''}
+                        <div class="text-gray-500 text-xs pt-2">Booking created: ${escapeHtml(createdAt)}</div>
+                        <div class="text-gray-500 text-xs">Booking ID: ${escapeHtml(bookingId)}</div>
+                    </div>
+                `;
+                resultArea.classList.remove('hidden');
+            } catch (err) {
+                console.error(err);
+                errorDiv.textContent = 'Something went wrong. Please try again later.';
+                errorDiv.classList.remove('hidden');
+            }
+        });
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, (m) => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
+        }
+    </script>
+</body>
+</html>
