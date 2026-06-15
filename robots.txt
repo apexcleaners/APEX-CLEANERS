@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://apexcleaners.github.io/APEX-CLEANERS/sitemap.xml
