@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: #0F172A; color: #F8FAFC; }
+        body { font-family: 'Inter', sans-serif; background-color: #0F172A; color: #F8FAFC; overflow-x: hidden; }
         :root { --primary: #0F172A; --secondary: #14B8A6; --accent: #38BDF8; }
         html { scroll-behavior: smooth; }
         ::-webkit-scrollbar { width: 8px; }
@@ -47,6 +47,12 @@
             transition: transform 0.3s ease;
         }
         .scroll-gallery img:hover { transform: scale(1.05); }
+        @media (max-width: 480px) {
+            .scroll-gallery img {
+                min-width: 140px;
+                height: 140px;
+            }
+        }
         .review-card {
             background: #1e293b;
             border-radius: 1rem;
@@ -59,9 +65,25 @@
         /* Star input styles for review form */
         .star-input-group { display: flex; gap: 0.5rem; justify-content: center; margin: 1rem 0; }
         .star-input { font-size: 2rem; cursor: pointer; color: #4b5563; transition: all 0.1s; }
+        @media (max-width: 480px) {
+            .star-input { font-size: 1.5rem; }
+        }
         .star-input:hover, .star-input.is-hover { color: #fbbf24; transform: scale(1.1); }
         .star-input.is-active { color: #fbbf24; }
         html { scroll-padding-top: 80px; }
+        /* Improve mobile tap targets */
+        @media (max-width: 640px) {
+            a.button, button:not(.star-input), .btn {
+                padding: 12px 16px;
+                min-height: 44px;
+                display: inline-block;
+            }
+            .review-card .flex-wrap.gap-2 button,
+            .review-card .flex-wrap.gap-2 a {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -264,10 +286,10 @@
       </div>
 
       <!-- Previous / Next buttons -->
-      <button onclick="moveCarousel(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+      <button onclick="moveCarousel(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition text-xl sm:text-2xl" aria-label="Previous">
         ‹
       </button>
-      <button onclick="moveCarousel(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition">
+      <button onclick="moveCarousel(1)" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition text-xl sm:text-2xl" aria-label="Next">
         ›
       </button>
     </div>
@@ -524,11 +546,16 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-white">Meet Our <span class="text-[#14B8A6]">Team</span></h2><p class="text-gray-400 mt-2">The dedicated professionals behind Apex Cleaners.</p></div>
             <div class="flex flex-col md:flex-row justify-center gap-8 max-w-4xl mx-auto">
-                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/leonpick1.JPG" alt="Leon Tadiwanshe Chaperuka" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Leon Tadiwanashe Chaperuka</h4><p class="text-[#14B8A6] font-semibold">Founder & Lead Cleaner</p></div></div>
-                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/decidepick1.JPG" alt="Decide Muchapireyi" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Decide Muchapireyi</h4><p class="text-[#14B8A6] font-semibold">Founder & Lead Cleaner</p></div></div>
-                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/mompick1.JPG" alt="Mrs Muchapireyi" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Mrs Muchapireyi</h4><p class="text-[#14B8A6] font-semibold">Operations Manager</p><p class="text-gray-400 text-sm">Customer Support Specialist</p></div></div>
-                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/johnpick1.JPG" alt="Mr John" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Mr John</h4><p class="text-[#14B8A6] font-semibold">Lead Cleaner</p><p class="text-[#14B8A6] font-semibold">Customer Support Specialist</p></div></div>
-                  <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-48 h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/dokapick1.JPG" alt="Mr John" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Mr Doka</h4><p class="text-[#14B8A6] font-semibold">Team Adviser</p></div></div>
+                <!-- Team member 1: Leon -->
+                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/leonpick1.JPG" alt="Leon Tadiwanshe Chaperuka" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Leon Tadiwanashe Chaperuka</h4><p class="text-[#14B8A6] font-semibold">Founder & Lead Cleaner</p></div></div>
+                <!-- Decide -->
+                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/decidepick1.JPG" alt="Decide Muchapireyi" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Decide Muchapireyi</h4><p class="text-[#14B8A6] font-semibold">Founder & Lead Cleaner</p></div></div>
+                <!-- Mrs Muchapireyi -->
+                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/mompick1.JPG" alt="Mrs Muchapireyi" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Mrs Muchapireyi</h4><p class="text-[#14B8A6] font-semibold">Operations Manager</p><p class="text-gray-400 text-sm">Customer Support Specialist</p></div></div>
+                <!-- Mr John -->
+                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/johnpick1.JPG" alt="Mr John" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Mr John</h4><p class="text-[#14B8A6] font-semibold">Lead Cleaner</p><p class="text-[#14B8A6] font-semibold">Customer Support Specialist</p></div></div>
+                <!-- Mr Doka -->
+                <div class="bg-[#1a1f2e] rounded-2xl p-6 border border-gray-800 hover:border-[#14B8A6] transition-colors flex-1"><div class="flex justify-center mb-4"><div class="w-32 h-32 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[#14B8A6] shadow-lg bg-[#0F172A]"><img src="./images/dokapick1.JPG" alt="Mr Doka" class="w-full h-full object-cover"></div></div><div class="text-center"><h4 class="text-2xl font-bold text-white">Mr Doka</h4><p class="text-[#14B8A6] font-semibold">Team Adviser</p></div></div>
             </div>
         </div>
     </section>
@@ -901,22 +928,20 @@
             });
         }
     </script>
-
-    <!-- STRUCTURED DATA (LocalBusiness) -->
     <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Apex Cleaners",
-  "image": "https://yourdomain.com/assets/cleaningequipments.jpg",
-  "logo": "https://yourdomain.com/logo.png",
-  "url": "https://yourdomain.com",
+  "image": "https://apexcleaners.github.io/APEX-CLEANERS/assets/cleaningequipments.jpg",
+  "logo": "https://apexcleaners.github.io/APEX-CLEANERS/assets/cleaningequipments.jpg",
+  "url": "https://apexcleaners.github.io/APEX-CLEANERS/",
   "telephone": "+263717366292",
   "email": "apexcleaners2026@gmail.com",
   "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "188T Dangamvura",
+    "streetAddress": "Zimunya Township",
     "addressLocality": "Mutare",
     "addressRegion": "Manicaland",
     "addressCountry": "ZW"
@@ -935,9 +960,3 @@
   ]
 }
 </script>
-<a href="#booking" class="fixed bottom-4 right-4 z-50 bg-[#14B8A6] text-white px-6 py-3 rounded-full shadow-lg font-bold md:hidden hover:bg-[#0D9488] transition">
-  📅 Book Now
-</a>
-
-</body>
-</html>
